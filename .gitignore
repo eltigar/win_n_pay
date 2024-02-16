@@ -1,0 +1,15 @@
+# Директории с Python байт-кодом
+__pycache__/
+*.pyc
+*.pyo
+
+# Папки виртуального окружения и переменные окружения
+venv/
+*.env
+
+# Файлы счетчиков и другие файлы с данными
+game_id_counter.txt
+*.pickle
+
+# JetBrains IDE settings
+.idea/
