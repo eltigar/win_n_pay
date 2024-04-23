@@ -8,7 +8,7 @@ users_PATH = "data/users.pickle"
 games_PATH = "data/games.pickle"
 setup_PATH = "data/setups.pickle"
 completed_games_PATH = "data/completed_games.pickle"
-aborted_games_PATH = "data/completed_games.pickle"
+aborted_games_PATH = "data/aborted_games.pickle"
 
 
 def save_object(obj: models.User | models.Game | models.setup_models.Setup, file_path: str) -> None:

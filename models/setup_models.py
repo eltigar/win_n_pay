@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
 import models
-from models.game_config import TARGET_POINTS, STARTING_MONEY
+from models.game_config import DEFAULT_POINTS, DEFAULT_MONEY
 from lexicon import lex
 
 """
@@ -28,14 +28,18 @@ class Setup:
     # id: str = field(default_factory=get_setup_id)
     player_list: list[str] = field(default_factory=list)
     names_dict: dict[str, str] = field(default_factory=dict)
-    points_to_win: int = TARGET_POINTS
-    starting_money: int = STARTING_MONEY
+    rounded_elos_dict: dict[str, str] = field(default_factory=dict)
+    points_to_win: int = DEFAULT_POINTS
+    starting_money: int = DEFAULT_MONEY
+
 
     def __str__(self):
-        players_line = lex.setup_representation['players'] + str(', '.join(self.names_dict.values()))
+        players_line = lex.setup_representation['players'] + str(', '.join(self.names_dict[pl_id] for pl_id in self.player_list))
+        elo_line = lex.setup_representation['elo'] + str(', '.join(str(self.rounded_elos_dict[pl_id]) for pl_id in self.player_list))
+
         points_line = lex.setup_representation['points'] + str(self.points_to_win)
         money_line = lex.setup_representation['money'] + str(self.starting_money)
-        return players_line + '\n' + points_line + '\n' + money_line
+        return players_line + '\n' + elo_line + '\n' + points_line + '\n' + money_line
 
     def update_starting_money(self, new_validated_money: int):
         self.starting_money = new_validated_money
@@ -49,14 +53,18 @@ class Setup:
         self.points_to_win = game.points_to_win
         self.starting_money = game.starting_money
 
-    def add_player(self, player_id: str, name: str):
+    def add_player(self, player_id: str, name: str, elo):
         self.player_list.append(player_id)
         self.names_dict[player_id] = name
+        self.rounded_elos_dict[player_id] = elo
+
+
 
     def remove_player(self, player_id: str):
         try:
             self.player_list.remove(player_id)
             self.names_dict.pop(player_id)
+            self.rounded_elos_dict.pop(player_id)
         except ValueError:
             print("Player not found in Setup object")
 

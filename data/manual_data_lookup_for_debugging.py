@@ -6,9 +6,9 @@ users_PATH = "users.pickle"
 games_PATH = "games.pickle"
 setup_PATH = "setups.pickle"
 completed_games_PATH = "completed_games.pickle"
-aborted_games_PATH = "completed_games.pickle"
+aborted_games_PATH = "aborted_games.pickle"
 
-file_path = completed_games_PATH
+file_path = users_PATH
 
 
 if os.path.isfile(file_path):

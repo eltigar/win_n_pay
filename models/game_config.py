@@ -1,4 +1,4 @@
-NUM_PLAYERS = 2
+NUM_PLAYERS = 2   # the only implemented case now
 
 if NUM_PLAYERS == 2:
     ALTERNATIVES = frozenset((0, 1, 2, 3, 4, 5))
@@ -6,5 +6,10 @@ if NUM_PLAYERS == 2:
                 (0, 5): (0, 5),
                 (5, 0): (1, 5)
             }
-    STARTING_MONEY: int = 10
-    TARGET_POINTS: int = 10
+    MIN_MONEY: int = 5
+    DEFAULT_MONEY: int = 10
+    MAX_MONEY: int = 25
+
+    MIN_POINTS: int = 1
+    DEFAULT_POINTS: int = 10
+    MAX_POINTS: int = 100
