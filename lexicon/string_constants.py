@@ -1,6 +1,6 @@
-from enum import Enum, StrEnum
+# from enum import Enum, StrEnum
 
-class cmds(StrEnum):
+class cmds:
     start = 'start'
     rules = 'rules'
     help = 'help'
@@ -18,13 +18,3 @@ class cmds(StrEnum):
     abort = 'abort'
     unexpected = 'unexpected'
     unknown = 'unknown'
-
-class statuses(StrEnum): # not used probably not needed
-    success = "success"
-
-mydict = {
-    cmds.new: 'new game is created'
-}
-
-# print(mydict[cmds.new])
-# print(cmds.new.name == cmds.new)
