@@ -41,7 +41,7 @@ class StartedCallbackFilter(BaseFilter):
         if game is None or user.id not in game.player_list:
             print("Something wrong in game-user sync")
             return False
-        return {'user': user, 'game': game}
+        return True  # {'user': user, 'game': game}
 
 
 router.callback_query.filter(StartedCallbackFilter())
@@ -65,12 +65,15 @@ async def process_abort_command(message: Message, user: models.User, game: model
 
 
 @router.callback_query(lambda callback_query: callback_query.data in str_alternatives)
-async def process_turn(callback: CallbackQuery, user: models.User, game: models.Game):
+async def process_turn(callback: CallbackQuery):  # , user: models.User, game: models.Game):
+    user_id = str(callback.from_user.id)
+    user = data.get_user(user_id)  # override values to fix sync issue with simultaneous turns,
+    game = data.get_game(user.game_id)  # both counted as a first turn (for both condition 'if "-" in ...' is passed)
     if game is None:
         return
     # validate_input()  # not needed since there are buttons
     bet = int(callback.data)
-    if bet == game.blocked_bet:
+    if bet == game.blocked_bet:  # only happen with fast double push (or usage of old buttons? but there should be none)
         await callback.answer(lex.info_messages['abuse'], show_alert=True)
         return
 

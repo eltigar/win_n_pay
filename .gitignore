@@ -13,3 +13,4 @@ game_id_counter.txt
 
 # JetBrains IDE settings
 .idea/
+/data/data_migration_script.py
