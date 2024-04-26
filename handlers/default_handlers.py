@@ -87,8 +87,11 @@ async def change_name_command(message: Message):
 @router.callback_query(F.data == cmds.change_name)
 async def change_name_callback(callback_query: CallbackQuery):
     await callback_query.message.delete_reply_markup()
-    await change_name(callback_query.message, str(callback_query.from_user.id))
-
+    user = data.get_user(str(callback_query.from_user.id))
+    lex = lang_codes.get(user.lang_code, lang_codes['en']) if user else lexicon_en
+    answer = (lex.commands_answers[cmds.change_name]['fail'] + '\n' +
+              lex.commands_answers[cmds.change_name]['current'] + user.name)
+    await callback_query.message.answer(answer, reply_markup=default_markup(lex), parse_mode='Markdown')
 
 @router.callback_query(F.data == cmds.change_lang)
 async def change_lang_callback(callback_query: CallbackQuery):
