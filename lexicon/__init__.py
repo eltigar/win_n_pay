@@ -1,3 +1,8 @@
-from lexicon import lexicon_ru as lex
+from lexicon import lexicon_ru, lexicon_en
 from lexicon.string_constants import cmds
-# set import to the corresponding lexicon file
+
+# Mapping of language codes to lexicon modules
+lang_codes = {
+    'ru': lexicon_ru,
+    'en': lexicon_en
+}

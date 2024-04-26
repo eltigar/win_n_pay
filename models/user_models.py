@@ -7,6 +7,7 @@ import models.setup_models
 class User:
     id: str
     name: str
+    lang_code: str
     setup: models.setup_models.Setup | None = None
     game_id: str | None = None
     elo: int = 1500 * 100  # 1/100th of a point

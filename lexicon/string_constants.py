@@ -5,6 +5,7 @@ class cmds:
     rules = 'rules'
     help = 'help'
     change_name = 'change_name'
+    change_lang = 'change_lang'
     new = 'new'
     join = 'join'
     repeat = 'repeat'

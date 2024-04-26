@@ -1,10 +1,11 @@
 import os
+import types
 from dataclasses import dataclass, field
 
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 from models.game_config import ALTERNATIVES, SPECIAL_CASES
-from lexicon import lex
+from lexicon import *
 
 # Define a file to store the id counter
 GAME_ID_COUNTER_FILE = 'game_id_counter.txt'
@@ -26,6 +27,7 @@ def get_game_id() -> str:
 class Game:
     player_list: list[str]
     names_dict: dict[str, str]
+    langs_dict: dict[str, str]
     rounded_elos_dict: dict[str, int]
     points_to_win: int
     starting_money: int
@@ -41,7 +43,11 @@ class Game:
     turns_history: list[dict[str, int | str]] = field(init=False)
     messages_dict: dict[str, Message | None] = field(init=False)
 
-    def __str__(self, last_turns=10) -> str:
+
+    def __str__(self):
+        return self.game_repr(lexicon_en, 100)
+
+    def game_repr(self, lex: types.ModuleType, last_turns: int = 10) -> str:
         column_width = 10
         first_turn_to_show = max(len(self.turns_history) - last_turns + 1, 1)
 

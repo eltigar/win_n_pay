@@ -1,4 +1,4 @@
-from string_constants import cmds
+from lexicon.string_constants import cmds
 from models.game_config import MIN_MONEY, MAX_MONEY, MIN_POINTS, MAX_POINTS
 
 game_terms: dict[str, str] = {
@@ -14,7 +14,7 @@ setup_representation: dict[str, str] = {
 }
 
 game_repr: dict[str, str] = {
-    "history": "Turn",
+    "turn": "Turn",
     "state": "Game state:",
     "elo": "🧠",
     "points": "🏆",
@@ -57,8 +57,14 @@ commands_answers: dict[str, str | dict] = {
     cmds.change_name: {
         "current": "Your current name ",
         "success": "Your name has been successfully changed to ",
-        "fail": "To change your name enter the command `/change_name ...`, replacing the ellipsis with the new name",
+        "fail": "To change your name enter the command `/change_name ...`, replacing the ellipsis with the new name. You may only use letters, not special symbols.",
         'button_text': "Change name",
+    },
+    cmds.change_lang: {
+        "current": "Your current language ",
+        "success": "Your new language is ",
+        "info": "English: en\nРусский: ru",
+        'button_text': "Change language🌐",
     },
     cmds.new: {
         'success': 'A new game has been created. Copy by pressing: ',
@@ -68,7 +74,7 @@ commands_answers: dict[str, str | dict] = {
         "success": "You've successfully joined the game with participant ",
         "fail": "Game not found",
         "none": "To join a game enter the command `/join ...`, replacing the ellipsis with the player's ID",
-        "for_admin": "A user has joined the game ",
+        "for_admin": "A user has joined the game: ",
         'button_text': "Join a game",
     },
     cmds.repeat: {
@@ -84,8 +90,8 @@ commands_answers: dict[str, str | dict] = {
         'button_text': "Main menu"
     },
     cmds.leave: {
-        '2': "You've successfully left the game ",
-        '2 for other': "Player left the game ",
+        '2': "You've successfully left the game with player ",
+        '2 for other': "Player left the game: ",
         '1': "You've left the game, and there's no one left",
         'button_text': "Leave game",
     },
@@ -123,6 +129,7 @@ commands_answers: dict[str, str | dict] = {
 
 info_messages = {
     "waiting": "⌛️_Waiting for the opponent's move_⌛️",
+    "langs": "English: en\nРусский: ru",
     "completed": {
         "points": "The game {game_id} is over!\nThe winner is {winners}, first to score {points} points.\nUpdated elo: {elo}.",
         "money": "The game is over!\nThe winner is {winners}, their opponent {opponent} went bankrupt.\nUpdated elo: {elo}."
