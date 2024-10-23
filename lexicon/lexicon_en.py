@@ -46,9 +46,9 @@ commands_answers: dict[str, str | dict] = {
              "`/repeat` - Rejoin a game\n"
              "\n*When preparing for a game:*\n"
              "/leave - Leave the game\n"
-             "`/set\_points` - Set points needed to win\n"
-             "`/set\_money` - Set the starting amount of money\n"
-             "/show\_joined - Show the list of players\n"
+             "/set_points - Set points needed to win\n"
+             "/set_money - Set the starting amount of money\n"
+             "/show_joined - Show the list of players\n"
              "/play - Start the game\n"
              "\n*During the game:*\n"
              "/abort - Abort the game",
@@ -111,7 +111,7 @@ commands_answers: dict[str, str | dict] = {
     },
     cmds.show_joined: {
         'success': "List of players: ",
-        'button_text': "Start"
+        'button_text': "Players list"
     },
     cmds.play: {
         'success': "The game starts!\n",
