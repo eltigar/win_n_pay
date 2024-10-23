@@ -1,0 +1,16 @@
+# Exclude Git files
+.git/
+.gitignore
+
+# Exclude Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Exclude local environment files
+venv/
+#*.env  # leaving it to get variables from
+
+# Exclude other unnecessary files or directories
+game_id_counter.txt
+*.pickle

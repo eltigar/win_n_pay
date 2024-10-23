@@ -1,0 +1,13 @@
+services:
+  telegram_bot:
+    build: .
+    env_file:
+      - win_n_pay.env
+    volumes:
+      # Mount each data file from local machine into the container
+      - C:/Users/ibrau/Repositories/volumes_data/win_n_pay/data/aborted_games.pickle:/app/data/aborted_games.pickle
+      - C:/Users/ibrau/Repositories/volumes_data/win_n_pay/data/completed_games.pickle:/app/data/completed_games.pickle
+      - C:/Users/ibrau/Repositories/volumes_data/win_n_pay/data/games.pickle:/app/data/games.pickle
+      - C:/Users/ibrau/Repositories/volumes_data/win_n_pay/data/users.pickle:/app/data/users.pickle
+      - C:/Users/ibrau/Repositories/volumes_data/win_n_pay/game_id_counter.txt:/app/game_id_counter.txt
+    restart: unless-stopped
